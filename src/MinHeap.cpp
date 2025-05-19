@@ -1,4 +1,4 @@
-#include "MinHeap.h"
+#include "../include/MinHeap.h"
 #include <stdexcept>
 
 void MinHeap::heapifyUp(int index) {
