@@ -1,5 +1,5 @@
-#include "CSVReader.h"
-#include "Train.h"
+#include "../include/CSVReader.h"
+#include "../include/Train.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>

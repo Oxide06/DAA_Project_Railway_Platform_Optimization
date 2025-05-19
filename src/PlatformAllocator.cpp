@@ -1,5 +1,5 @@
-#include "PlatformAllocator.h"
-#include "MinHeap.h"
+#include "../include/PlatformAllocator.h"
+#include "../include/MinHeap.h"
 #include <iostream>
 #include <algorithm>
 const int MAX_PLATFORMS = 7;

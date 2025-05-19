@@ -1,6 +1,6 @@
 #include <iostream>
-#include "PlatformAllocator.h"
-#include "CSVReader.h"
+#include "../include/PlatformAllocator.h"
+#include "../include/CSVReader.h"
 
 int main() {
     TrainScheduler scheduler;
