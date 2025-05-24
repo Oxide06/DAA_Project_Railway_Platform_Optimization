@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../include/PlatformAllocator.h"
 #include "../include/CSVReader.h"
-
+#include "../include/SimulationUI.h"
 int main() {
     TrainScheduler scheduler;
     CSVReader reader;
@@ -10,7 +10,9 @@ int main() {
     reader.readCSV(filename, scheduler);
 
     scheduler.scheduleTrains();
-    scheduler.printSchedule();
-
+    //scheduler.printSchedule();
+    
+    SimulationUI ui(scheduler);
+    ui.run();
     return 0;
 }
