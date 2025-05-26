@@ -6,7 +6,7 @@
 SimulationUI::SimulationUI(const TrainScheduler& scheduler) 
     : scheduler(scheduler), simTime(0), isPlaying(false), speedMultiplier(1.0f) {
     window.create(sf::VideoMode(2000, 1800), "Railway Platform Simulation");
-    if (!font.loadFromFile("/home/garv/Desktop/DAA_PROJECT/src/Textures/fonts/arial.ttf")) {
+    if (!font.loadFromFile("/home/garv/Desktop/DAA_PROJECT/DAA_PBL/src/Textures/fonts/arial.ttf")) {
         std::cerr << "Error loading font\n";
     }
 }

@@ -2,7 +2,7 @@
 #include "../include/MinHeap.h"
 #include <iostream>
 #include <algorithm>
-const int MAX_PLATFORMS = 4;
+const int MAX_PLATFORMS = 7;
 
 TrainScheduler::TrainScheduler(const std::vector<Train>& trains) 
     : trains(trains), platformCount(0) {}
