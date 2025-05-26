@@ -31,3 +31,4 @@ void CSVReader::readCSV(const std::string& filename, TrainScheduler& scheduler) 
 
     file.close();
 }
+
