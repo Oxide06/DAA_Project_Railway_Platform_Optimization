@@ -1,4 +1,5 @@
 #include "../include/SimulationUI.h"
+#include "../include/PlatformAllocator.h"
 #include <iomanip>
 #include <sstream>
 #include <iostream>
@@ -142,6 +143,7 @@ void SimulationUI::drawTrains() {
     const float trackStart = 100.f;
     const float trackEnd = window.getSize().x - 100.f;
     const float trainWidth = trainTexture.getSize().x * trainScale;
+    const float trainHeight = trainTexture.getSize().y * trainScale;
 
     for(const auto& assignment : scheduler.getAssignments()) {
         if(simTime >= assignment.arrival && simTime < assignment.departure) {
@@ -169,18 +171,44 @@ void SimulationUI::drawTrains() {
                     trainColor = STOPPED_COLOR;
                 }
 
-                float availableSpace = trackEnd - trackStart - trainWidth;
-                float xPos = trackStart + (animatedProgress * availableSpace);
-                xPos = std::clamp(xPos, trackStart, trackEnd - trainWidth);
+                // Fixed train positioning calculation
+                float availableTrackWidth = tracks[platformIndex].getGlobalBounds().width;
+                float maxTrainX = trackStart + availableTrackWidth - trainWidth;
+                float minTrainX = trackStart + 50.f; // Small margin from track start
+                
+                float xPos = minTrainX + (animatedProgress * (maxTrainX - minTrainX));
+                xPos = std::clamp(xPos, minTrainX, maxTrainX);
 
                 float trackY = tracks[platformIndex].getPosition().y;
-                float trainY = trackY + (trackTexture.getSize().y * 0.425f)/2 - 
-                             (trainTexture.getSize().y * trainScale)/2;
+                float trainY = trackY + (tracks[platformIndex].getGlobalBounds().height/2) - (trainHeight/2);
                 
                 train.setPosition(xPos, trainY);
                 train.setScale(trainScale, trainScale);
                 train.setColor(trainColor);
                 window.draw(train);
+
+                // Draw train ID tag above the train
+                sf::Text trainIdTag;
+                trainIdTag.setFont(font);
+                trainIdTag.setString("Train " + assignment.trainID);
+                trainIdTag.setCharacterSize(20);
+                trainIdTag.setFillColor(sf::Color::White);
+                
+                // Center the text above the train
+                sf::FloatRect textBounds = trainIdTag.getLocalBounds();
+                float textX = xPos + (trainWidth / 2) - (textBounds.width / 2);
+                float textY = trainY + 60.f; // Position above the train
+                
+                trainIdTag.setPosition(textX, textY);
+                
+                // Draw a semi-transparent background for better readability
+                sf::RectangleShape tagBackground;
+                tagBackground.setSize(sf::Vector2f(textBounds.width + 10, textBounds.height + 5));
+                tagBackground.setPosition(textX - 5, textY);
+                tagBackground.setFillColor(sf::Color(0, 0, 0, 150));
+                
+                window.draw(tagBackground);
+                window.draw(trainIdTag);
             }
         }
     }
@@ -222,7 +250,7 @@ void SimulationUI::drawControls() {
     speedText.setString(std::to_string(speedMultiplier) + "x");
     speedText.setCharacterSize(24);
     speedText.setPosition(980, buttonY + 10);
-    speedText.setFillColor(sf::Color::Cyan);
+    speedText.setFillColor(sf::Color::White);
 
     auto drawControl = [&](auto& btn, auto& label) {
         window.draw(btn);
