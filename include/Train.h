@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TRAIN_H
-#define TRAIN_H
 
 #include <string>
 
@@ -20,4 +18,3 @@ public:
     static int convertToMinutes(const std::string& timeStr);
 };
 
-#endif

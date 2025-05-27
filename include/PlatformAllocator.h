@@ -1,6 +1,5 @@
 #pragma once
-#ifndef TRAINSCHEDULER_H
-#define TRAINSCHEDULER_H
+
 
 #include "Train.h"
 #include <vector>
@@ -30,4 +29,3 @@ public:
     const std::vector<Assignment>& getAssignments() const;
 };
 
-#endif

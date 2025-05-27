@@ -1,5 +1,4 @@
-#ifndef CSVREADER_H
-#define CSVREADER_H
+#pragma once
 
 #include <string>
 #include "PlatformAllocator.h"
@@ -9,4 +8,3 @@ public:
     void readCSV(const std::string& filename, TrainScheduler& scheduler);
 };
 
-#endif

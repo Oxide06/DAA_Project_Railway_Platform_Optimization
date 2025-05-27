@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MINHEAP_H
-#define MINHEAP_H
 
 #include <vector>
 #include <utility>
@@ -19,4 +17,4 @@ public:
     bool isEmpty() const;
 };
 
-#endif
+
